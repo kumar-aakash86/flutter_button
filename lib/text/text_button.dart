@@ -5,20 +5,20 @@ import 'package:flutter/material.dart';
 class FlutterTextButton extends StatefulWidget {
   final String title;
   final VoidCallback onTap;
-  final bool wOpacity;
-  final double opacityValue;
-  final double defaultSize;
-  final double pressedSize;
-  final Color color;
-  final FontWeight fontWeight;
-  final Locale locale;
-  final TextAlign textAlign;
-  final String fontFamily;
+  final bool? wOpacity;
+  final double? opacityValue;
+  final double? defaultSize;
+  final double? pressedSize;
+  final Color? color;
+  final FontWeight? fontWeight;
+  final Locale? locale;
+  final TextAlign? textAlign;
+  final String? fontFamily;
 
   FlutterTextButton({
-    Key key,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
     this.wOpacity,
     this.opacityValue,
     this.defaultSize,
@@ -63,11 +63,7 @@ class _FlutterTextButtonState extends State<FlutterTextButton> {
       },
       child: (widget.wOpacity != false && widget.wOpacity != null)
           ? Opacity(
-              opacity: _isTapped
-                  ? (widget.opacityValue == null)
-                      ? .7
-                      : widget.opacityValue
-                  : 1,
+              opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
               child: buildText(),
             )
           : buildText(),

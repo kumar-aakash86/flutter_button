@@ -12,8 +12,8 @@ class StyleOf3dButton {
   final double tapped;
 
   const StyleOf3dButton({
-    this.width,
-    this.height,
+    required this.width,
+    required this.height,
     this.topColor = const Color(0xFF45484c),
     this.backColor = const Color(0xFF191a1c),
     this.borderRadius = const BorderRadius.all(
@@ -25,6 +25,8 @@ class StyleOf3dButton {
   static const DEFAULT = const StyleOf3dButton(
     topColor: const Color(0xFFffffff),
     backColor: const Color(0xFFCFD8DC),
+    height: 30,
+    width: 100,
   );
 }
 
@@ -36,8 +38,8 @@ class Button3D extends StatefulWidget {
   final double height;
 
   Button3D({
-    @required this.onPressed,
-    @required this.child,
+    required this.onPressed,
+    required this.child,
     this.style = StyleOf3dButton.DEFAULT,
     this.width = 120,
     this.height = 60,

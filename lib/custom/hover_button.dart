@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 class HoverButton extends StatefulWidget {
   final String title;
   final VoidCallback onTap;
-  final Color borderColor;
-  final Color spashColor;
-  final Color titleColor;
-  final Color tappedTitleColor;
-  final double titleSize;
-  final FontWeight fontWeight;
-  final BorderRadiusGeometry borderRadius;
-  final double borderWidth;
+  final Color? borderColor;
+  final Color? spashColor;
+  final Color? titleColor;
+  final Color? tappedTitleColor;
+  final double? titleSize;
+  final FontWeight? fontWeight;
+  final BorderRadiusGeometry? borderRadius;
+  final double? borderWidth;
 
   HoverButton({
-    Key key,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
     this.borderColor,
     this.spashColor,
     this.titleColor,
@@ -83,8 +83,8 @@ class _HoverButtonState extends State<HoverButton> {
           ? BorderRadius.circular(0)
           : widget.borderRadius,
       border: Border.all(
-        width: (widget.borderWidth != null) ? widget.borderWidth : 2,
-        color: (widget.borderColor != null) ? widget.borderColor : Colors.black,
+        width: widget.borderWidth ?? 2,
+        color: widget.borderColor ?? Colors.black,
       ),
       color: _isTapped
           ? (widget.spashColor != null)
@@ -110,20 +110,20 @@ class _HoverButtonState extends State<HoverButton> {
 class AnimatedHoverButton extends StatefulWidget {
   final String title;
   final VoidCallback onTap;
-  final Color borderColor;
-  final Color spashColor;
-  final Color titleColor;
-  final Color tappedTitleColor;
-  final double titleSize;
-  final FontWeight fontWeight;
-  final BorderRadiusGeometry borderRadius;
-  final Duration duration;
-  final double borderWidth;
+  final Color? borderColor;
+  final Color? spashColor;
+  final Color? titleColor;
+  final Color? tappedTitleColor;
+  final double? titleSize;
+  final FontWeight? fontWeight;
+  final BorderRadiusGeometry? borderRadius;
+  final Duration? duration;
+  final double? borderWidth;
 
   AnimatedHoverButton({
-    Key key,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
     this.borderColor,
     this.spashColor,
     this.titleColor,
@@ -141,9 +141,9 @@ class AnimatedHoverButton extends StatefulWidget {
 
 class _AnimatedHoverButtonState extends State<AnimatedHoverButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<Color> _colorAnimation;
-  Animation<Color> _textColorAnimation;
+  late AnimationController _animationController;
+  late Animation<Color?> _colorAnimation;
+  late Animation<Color?> _textColorAnimation;
 
   @override
   void initState() {
@@ -157,7 +157,7 @@ class _AnimatedHoverButtonState extends State<AnimatedHoverButton>
 
     _colorAnimation = ColorTween(
       begin: Colors.transparent,
-      end: (widget.spashColor != null) ? widget.spashColor : Colors.black,
+      end: widget.spashColor ?? Colors.black,
     ).animate(_animationController);
 
     _textColorAnimation = ColorTween(
@@ -213,8 +213,8 @@ class _AnimatedHoverButtonState extends State<AnimatedHoverButton>
           ? BorderRadius.circular(0)
           : widget.borderRadius,
       border: Border.all(
-        width: (widget.borderWidth != null) ? widget.borderWidth : 2,
-        color: (widget.borderColor != null) ? widget.borderColor : Colors.black,
+        width: widget.borderWidth ?? 2,
+        color: widget.borderColor ?? Colors.black,
       ),
       color: _colorAnimation.value,
     );

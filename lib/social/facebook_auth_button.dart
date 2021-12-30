@@ -5,24 +5,24 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FacebookAuthButton extends StatefulWidget {
   final VoidCallback onTap;
-  final String title;
-  final Color backgroundColor;
-  final Color titleColor;
-  final Color iconColor;
-  final BorderRadiusGeometry borderRadius;
-  final List<BoxShadow> shadows;
-  final double fontSize;
-  final double iconSize;
-  final FontWeight fontWeight;
-  final bool wOpacity;
-  final bool wGradientColors;
-  final double opacityValue;
-  final List<Color> gradientColors;
-  final AlignmentGeometry beginGradient;
-  final AlignmentGeometry endGradient;
+  final String? title;
+  final Color? backgroundColor;
+  final Color? titleColor;
+  final Color? iconColor;
+  final BorderRadiusGeometry? borderRadius;
+  final List<BoxShadow>? shadows;
+  final double? fontSize;
+  final double? iconSize;
+  final FontWeight? fontWeight;
+  final bool? wOpacity;
+  final bool? wGradientColors;
+  final double? opacityValue;
+  final List<Color>? gradientColors;
+  final AlignmentGeometry? beginGradient;
+  final AlignmentGeometry? endGradient;
 
   FacebookAuthButton({
-    @required this.onTap,
+    required this.onTap,
     this.title,
     this.backgroundColor,
     this.titleColor,
@@ -72,11 +72,7 @@ class _FacebookAuthButtonState extends State<FacebookAuthButton> {
 
   Opacity buildButtonWOpacity() {
     return Opacity(
-      opacity: _isTapped
-          ? (widget.opacityValue == null)
-              ? .7
-              : widget.opacityValue
-          : 1,
+      opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
       child: buildButton(),
     );
   }
@@ -99,7 +95,7 @@ class _FacebookAuthButtonState extends State<FacebookAuthButton> {
 
             ///
             Text(
-              (widget.title != null) ? widget.title : "Facebook",
+              widget.title ?? "Facebook",
               style: TextStyle(
                 color: (widget.titleColor == null)
                     ? Colors.white
@@ -126,13 +122,9 @@ class _FacebookAuthButtonState extends State<FacebookAuthButton> {
       gradient: (widget.wGradientColors == true)
           ? (widget.gradientColors != null)
               ? LinearGradient(
-                  colors: widget.gradientColors,
-                  begin: (widget.beginGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.topRight,
-                  end: (widget.endGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.bottomLeft,
+                  colors: widget.gradientColors!,
+                  begin: widget.beginGradient ?? Alignment.topRight,
+                  end: widget.beginGradient ?? Alignment.bottomLeft,
                 )
               : LinearGradient(
                   begin: Alignment.topRight,
@@ -160,19 +152,19 @@ class _FacebookAuthButtonState extends State<FacebookAuthButton> {
 
 class CircularFBAuthButton extends StatefulWidget {
   final VoidCallback onTap;
-  final Color backgorundColor;
-  final Color iconColor;
-  final bool wOpacity;
-  final bool wBorder;
-  final Color borderColor;
-  final double opacityValue;
-  final double size;
-  final double iconSize;
-  final List<BoxShadow> shadows;
-  final BorderRadiusGeometry borderRadius;
+  final Color? backgorundColor;
+  final Color? iconColor;
+  final bool? wOpacity;
+  final bool? wBorder;
+  final Color? borderColor;
+  final double? opacityValue;
+  final double? size;
+  final double? iconSize;
+  final List<BoxShadow>? shadows;
+  final BorderRadiusGeometry? borderRadius;
 
   CircularFBAuthButton({
-    @required this.onTap,
+    required this.onTap,
     this.backgorundColor,
     this.iconColor,
     this.wOpacity,
@@ -214,11 +206,7 @@ class CircularFBAuthButtonState extends State<CircularFBAuthButton> {
       child: (widget.wOpacity == null || widget.wOpacity == false)
           ? body()
           : Opacity(
-              opacity: _isTapped
-                  ? (widget.opacityValue != null)
-                      ? widget.opacityValue
-                      : .7
-                  : 1,
+              opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
               child: body(),
             ),
     );
@@ -251,9 +239,7 @@ class CircularFBAuthButtonState extends State<CircularFBAuthButton> {
           : Color(0xff4267B2),
       border: (widget.wBorder != null && widget.wBorder != false)
           ? Border.all(
-              color: (widget.borderColor == null)
-                  ? Colors.black
-                  : widget.borderColor,
+              color: widget.borderColor ?? Colors.black,
             )
           : null,
       boxShadow: (widget.shadows == null) ? [] : widget.shadows,
@@ -270,12 +256,12 @@ class CircularFBAuthButtonState extends State<CircularFBAuthButton> {
 
 class MagicalFBButton extends StatefulWidget {
   final String title;
-  final double opacityValue;
+  final double? opacityValue;
   final VoidCallback onTap;
 
   MagicalFBButton({
-    @required this.title,
-    @required this.onTap,
+    required this.title,
+    required this.onTap,
     this.opacityValue,
   });
 
@@ -305,11 +291,7 @@ class _MagicalFBButtonState extends State<MagicalFBButton> {
         });
       },
       child: Opacity(
-        opacity: _isTapped
-            ? (widget.opacityValue != null)
-                ? widget.opacityValue
-                : .7
-            : 1,
+        opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
         child: buildContainer(context),
       ),
     );
@@ -319,7 +301,7 @@ class _MagicalFBButtonState extends State<MagicalFBButton> {
     return Container(
       height: 55,
       decoration: BoxDecoration(
-        color: Colors.blue[800].withOpacity(.7),
+        color: Colors.blue[800]?.withOpacity(.7),
         borderRadius: BorderRadius.circular(30),
       ),
       width: MediaQuery.of(context).size.width - 20,

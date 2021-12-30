@@ -5,30 +5,30 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TwitterAuthButton extends StatefulWidget {
   final VoidCallback onTap;
-  final String title;
-  final Color backgroundColor;
-  final Color titleColor;
-  final Color iconColor;
-  final BorderRadiusGeometry borderRadius;
-  final List<BoxShadow> shadows;
-  final double fontSize;
-  final double iconSize;
-  final FontWeight fontWeight;
-  final bool wOpacity;
-  final double opacityValue;
-  final bool wGradientColors;
-  final List<Color> gradientColors;
-  final AlignmentGeometry beginGradient;
-  final AlignmentGeometry endGradient;
+  final String? title;
+  final Color? backgroundColor;
+  final Color? titleColor;
+  final Color? iconColor;
+  final BorderRadiusGeometry? borderRadius;
+  final List<BoxShadow>? shadows;
+  final double? fontSize;
+  final double? iconSize;
+  final FontWeight? fontWeight;
+  final bool? wOpacity;
+  final double? opacityValue;
+  final bool? wGradientColors;
+  final List<Color>? gradientColors;
+  final AlignmentGeometry? beginGradient;
+  final AlignmentGeometry? endGradient;
 
   TwitterAuthButton({
-    @required this.onTap,
+    required this.onTap,
     this.title,
     this.backgroundColor,
     this.titleColor,
     this.iconColor,
     this.borderRadius,
-    this.shadows, 
+    this.shadows,
     this.fontSize,
     this.iconSize,
     this.wOpacity,
@@ -72,11 +72,7 @@ class _TwitterAuthButtonState extends State<TwitterAuthButton> {
 
   Opacity buildButtonWOpacity() {
     return Opacity(
-      opacity: _isTapped
-          ? (widget.opacityValue == null)
-              ? .7
-              : widget.opacityValue
-          : 1,
+      opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
       child: buildButton(),
     );
   }
@@ -99,7 +95,7 @@ class _TwitterAuthButtonState extends State<TwitterAuthButton> {
 
             ///
             Text(
-              (widget.title != null) ? widget.title : "Twitter",
+              widget.title ?? "Twitter",
               style: TextStyle(
                 color: (widget.titleColor == null)
                     ? Colors.white
@@ -126,13 +122,9 @@ class _TwitterAuthButtonState extends State<TwitterAuthButton> {
       gradient: (widget.wGradientColors == true)
           ? (widget.gradientColors != null)
               ? LinearGradient(
-                  colors: widget.gradientColors,
-                  begin: (widget.beginGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.topRight,
-                  end: (widget.endGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.bottomLeft,
+                  colors: widget.gradientColors!,
+                  begin: widget.beginGradient ?? Alignment.topRight,
+                  end: widget.beginGradient ?? Alignment.bottomLeft,
                 )
               : LinearGradient(
                   begin: Alignment.topRight,
@@ -159,19 +151,19 @@ class _TwitterAuthButtonState extends State<TwitterAuthButton> {
 
 class CircularTWAuthButton extends StatefulWidget {
   final VoidCallback onTap;
-  final Color backgorundColor;
-  final Color iconColor;
-  final bool wOpacity;
-  final bool wBorder;
-  final Color borderColor;
-  final double opacityValue;
-  final double size;
-  final double iconSize;
-  final List<BoxShadow> shadows;
-  final BorderRadiusGeometry borderRadius;
+  final Color? backgorundColor;
+  final Color? iconColor;
+  final bool? wOpacity;
+  final bool? wBorder;
+  final Color? borderColor;
+  final double? opacityValue;
+  final double? size;
+  final double? iconSize;
+  final List<BoxShadow>? shadows;
+  final BorderRadiusGeometry? borderRadius;
 
   CircularTWAuthButton({
-    @required this.onTap,
+    required this.onTap,
     this.backgorundColor,
     this.iconColor,
     this.wOpacity,
@@ -213,11 +205,7 @@ class CircularTWAuthButtonState extends State<CircularTWAuthButton> {
       child: (widget.wOpacity == null || widget.wOpacity == false)
           ? body()
           : Opacity(
-              opacity: _isTapped
-                  ? (widget.opacityValue != null)
-                      ? widget.opacityValue
-                      : .7
-                  : 1,
+              opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
               child: body(),
             ),
     );
@@ -250,9 +238,7 @@ class CircularTWAuthButtonState extends State<CircularTWAuthButton> {
           : Color(0xff1DA1F2),
       border: (widget.wBorder != null && widget.wBorder != false)
           ? Border.all(
-              color: (widget.borderColor == null)
-                  ? Colors.black
-                  : widget.borderColor,
+              color: widget.borderColor ?? Colors.black,
             )
           : null,
       boxShadow: (widget.shadows == null) ? [] : widget.shadows,
@@ -268,13 +254,13 @@ class CircularTWAuthButtonState extends State<CircularTWAuthButton> {
 
 class MagicalTWButton extends StatefulWidget {
   final String title;
-  final double opacityValue;
+  final double? opacityValue;
   final VoidCallback onTap;
 
   MagicalTWButton({
-    @required this.title,
+    required this.title,
     this.opacityValue,
-    @required this.onTap,
+    required this.onTap,
   });
 
   @override
@@ -303,11 +289,7 @@ class _MagicalTWButtonState extends State<MagicalTWButton> {
         });
       },
       child: Opacity(
-        opacity: _isTapped
-            ? (widget.opacityValue != null)
-                ? widget.opacityValue
-                : .7
-            : 1,
+        opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
         child: buildContainer(context),
       ),
     );

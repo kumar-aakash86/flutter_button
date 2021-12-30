@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 class AnimePressButton extends StatefulWidget {
   final Function onTap;
   final String title;
-  final Duration duration;
+  final Duration? duration;
   //final Curve curve;
-  final double size;
-  final BorderRadius borderRadius;
-  final List<Shadow> boxShadow;
-  final Color color;
-  final bool wGradient;
-  final List<Color> gradientColors;
-  final Alignment beginGradient;
-  final Alignment endGradient;
-  final Color titleColor;
-  final double titleSize;
-  final FontWeight fontWeight;
+  final double? size;
+  final BorderRadius? borderRadius;
+  final List<BoxShadow>? boxShadow;
+  final Color? color;
+  final bool? wGradient;
+  final List<Color>? gradientColors;
+  final Alignment? beginGradient;
+  final Alignment? endGradient;
+  final Color? titleColor;
+  final double? titleSize;
+  final FontWeight? fontWeight;
 
   AnimePressButton({
-    @required this.onTap,
-    @required this.title,
+    required this.onTap,
+    required this.title,
     this.duration,
     //this.curve,
     this.size,
@@ -42,8 +42,8 @@ class AnimePressButton extends StatefulWidget {
 
 class _AnimePressButtonState extends State<AnimePressButton>
     with SingleTickerProviderStateMixin {
-  double _scale;
-  AnimationController _animationController;
+  double? _scale;
+  late AnimationController _animationController;
   //Animation curve;
 
   @override
@@ -84,7 +84,7 @@ class _AnimePressButtonState extends State<AnimePressButton>
         _animationController.reverse();
       },
       child: Transform.scale(
-        scale: _scale,
+        scale: _scale ?? 1,
         child: buttonBody(),
       ),
     );
@@ -92,7 +92,7 @@ class _AnimePressButtonState extends State<AnimePressButton>
 
   Widget buttonBody() {
     return Container(
-      height: (widget.size != null) ? widget.size / 2.3 : 70,
+      height: (widget.size != null) ? (widget.size ?? 1 / 2.3) : 70,
       width: (widget.size != null) ? widget.size : 200,
 
       ///
@@ -119,26 +119,21 @@ class _AnimePressButtonState extends State<AnimePressButton>
       borderRadius: (widget.borderRadius != null)
           ? widget.borderRadius
           : BorderRadius.circular(10),
-      boxShadow: (widget.boxShadow != null)
-          ? widget.boxShadow
-          : [
-              BoxShadow(
-                blurRadius: 12.0,
-                offset: Offset(0.0, 5.0),
-              ),
-            ],
+      boxShadow: widget.boxShadow ??
+          [
+            BoxShadow(
+              blurRadius: 12.0,
+              offset: Offset(0.0, 5.0),
+            ),
+          ],
 
       ///
       gradient: (widget.wGradient == true)
           ? (widget.gradientColors != null)
               ? LinearGradient(
-                  colors: widget.gradientColors,
-                  begin: (widget.beginGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.topRight,
-                  end: (widget.endGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.bottomLeft,
+                  colors: widget.gradientColors!,
+                  begin: widget.beginGradient ?? Alignment.topRight,
+                  end: widget.beginGradient ?? Alignment.bottomLeft,
                 )
               : LinearGradient(
                   begin: Alignment.topRight,

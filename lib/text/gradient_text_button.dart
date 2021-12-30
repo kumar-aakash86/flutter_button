@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 class GradientTextButton extends StatefulWidget {
   final String title;
   final VoidCallback onTap;
-  final bool wOpacity;
-  final double opacityValue;
-  final double defaultSize;
-  final double pressedSize;
-  final FontWeight fontWeight;
-  final List<Color> gradientColors;
-  final AlignmentGeometry beginGradient;
-  final AlignmentGeometry endGradient;
-  final Locale locale;
-  final TextAlign textAlign;
-  final String fontFamily;
+  final bool? wOpacity;
+  final double? opacityValue;
+  final double? defaultSize;
+  final double? pressedSize;
+  final FontWeight? fontWeight;
+  final List<Color>? gradientColors;
+  final AlignmentGeometry? beginGradient;
+  final AlignmentGeometry? endGradient;
+  final Locale? locale;
+  final TextAlign? textAlign;
+  final String? fontFamily;
 
   GradientTextButton({
-    Key key,
-    @required this.title,
-    @required this.onTap,
+    Key? key,
+    required this.title,
+    required this.onTap,
     this.wOpacity,
     this.opacityValue,
     this.defaultSize,
@@ -73,7 +73,7 @@ class _GradientTextButtonState extends State<GradientTextButton> {
 
   Opacity buildOpacityProperty() {
     return Opacity(
-      opacity: _isTapped ? (widget.opacityValue != null) ? widget.opacityValue : .5 : 1,
+      opacity: _isTapped ? widget.opacityValue ?? .5 : 1,
       child: buildText(),
     );
   }
@@ -97,15 +97,10 @@ class _GradientTextButtonState extends State<GradientTextButton> {
         fontFamily: widget.fontFamily,
         foreground: Paint()
           ..shader = LinearGradient(
-            begin: (widget.beginGradient != null)
-                ? widget.beginGradient
-                : Alignment.topRight,
-            end: (widget.endGradient != null)
-                ? widget.beginGradient
-                : Alignment.centerLeft,
-            colors: (widget.gradientColors != null)
-                ? widget.gradientColors
-                : [Colors.black, Colors.blueGrey[700]],
+            begin: widget.beginGradient ?? Alignment.topRight,
+            end: widget.beginGradient ?? Alignment.centerLeft,
+            colors:
+                widget.gradientColors ?? [Colors.black, Colors.blueGrey[700]!],
           ).createShader(
             Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
           ),

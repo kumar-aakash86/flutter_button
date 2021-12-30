@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import '../custom/opacity_button.dart';
 
 class AuthButton extends StatefulWidget {
-  final Function onTap;
+  final Function() onTap;
   final Widget child;
-  final Color backgroundColor;
-  final Border border;
-  final List<BoxShadow> shadow;
-  final bool wGradient;
-  final List<Color> gradientColors;
-  final DecorationImage decorationImage;
-  final double opacityValue;
-  final double height;
-  final double width;
-  final double topLeftRadius;
-  final double topRightRadius;
-  final double bottomLeftRadius;
-  final double bottomRightRadius;
+  final Color? backgroundColor;
+  final Border? border;
+  final List<BoxShadow>? shadow;
+  final bool? wGradient;
+  final List<Color>? gradientColors;
+  final DecorationImage? decorationImage;
+  final double? opacityValue;
+  final double? height;
+  final double? width;
+  final double? topLeftRadius;
+  final double? topRightRadius;
+  final double? bottomLeftRadius;
+  final double? bottomRightRadius;
 
   const AuthButton({
-    Key key,
-    @required this.onTap,
-    @required this.child,
+    Key? key,
+    required this.onTap,
+    required this.child,
     this.backgroundColor,
     this.border,
     this.shadow,
@@ -50,7 +50,7 @@ class _AuthButtonState extends State<AuthButton> {
     return OpacityButton(
       onTap: widget.onTap,
       opacityValue: (widget.opacityValue != null) ? widget.opacityValue : .7,
-          child: Container(
+      child: Container(
         height: (widget.height != null) ? widget.height : 70,
         width: (widget.width != null) ? widget.width : 180,
         decoration: buildBoxDecoration(),
@@ -68,20 +68,16 @@ class _AuthButtonState extends State<AuthButton> {
           : Colors.blue,
       border: widget.border,
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(
-            (widget.topLeftRadius != null) ? widget.topLeftRadius : 30),
-        topRight: Radius.circular(
-            (widget.topRightRadius != null) ? widget.topRightRadius : 30),
-        bottomLeft: Radius.circular(
-            (widget.bottomLeftRadius != null) ? widget.bottomLeftRadius : 30),
-        bottomRight: Radius.circular(
-            (widget.bottomRightRadius != null) ? widget.bottomRightRadius : 30),
+        topLeft: Radius.circular(widget.topLeftRadius ?? 30),
+        topRight: Radius.circular(widget.topRightRadius ?? 30),
+        bottomLeft: Radius.circular(widget.bottomLeftRadius ?? 30),
+        bottomRight: Radius.circular(widget.bottomRightRadius ?? 30),
       ),
       boxShadow: (widget.shadow != null) ? widget.shadow : [],
       image: widget.decorationImage,
       gradient: (widget.wGradient == null || widget.wGradient == false)
           ? null
-          : LinearGradient(colors: widget.gradientColors),
+          : LinearGradient(colors: widget.gradientColors!),
     );
   }
 }

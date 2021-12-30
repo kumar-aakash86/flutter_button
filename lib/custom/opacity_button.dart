@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class OpacityButton extends StatefulWidget {
   final Widget child;
-  final double opacityValue;
+  final double? opacityValue;
   final VoidCallback onTap;
 
   const OpacityButton({
-    Key key,
-    @required this.child,
-    @required this.onTap,
+    Key? key,
+    required this.child,
+    required this.onTap,
     this.opacityValue,
   }) : super(key: key);
 
@@ -40,11 +40,7 @@ class _OpacityButtonState extends State<OpacityButton> {
         widget.onTap();
       },
       child: Opacity(
-        opacity: _isTapped
-            ? (widget.opacityValue != null)
-                ? widget.opacityValue
-                : .7
-            : 1,
+        opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
         child: widget.child,
       ),
     );

@@ -4,29 +4,29 @@ import 'package:flutter/material.dart';
 
 class ImageFAB extends StatefulWidget {
   final ImageProvider<Object> image;
-  final Function onTap;
-  final Widget child;
-  final double size;
-  final BorderRadiusGeometry borderRadius;
-  final BoxBorder border;
-  final List<BoxShadow> shadows;
-  final bool wOpacity;
-  final double opacityValue;
+  final Function() onTap;
+  final Widget? child;
+  final double? size;
+  final BorderRadiusGeometry? borderRadius;
+  final BoxBorder? border;
+  final List<BoxShadow>? shadows;
+  final bool? wOpacity;
+  final double? opacityValue;
 
   ///
-  final void Function(Object, StackTrace) onImageError;
-  final ColorFilter imageColorFilter;
-  final BoxFit imageFit;
-  final AlignmentGeometry imageAlignment;
-  final Rect imageCenterSlice;
-  final ImageRepeat imageRepeat;
-  final bool imageMatchTextDirection;
-  final double imageScale;
+  final void Function(Object, StackTrace?)? onImageError;
+  final ColorFilter? imageColorFilter;
+  final BoxFit? imageFit;
+  final AlignmentGeometry? imageAlignment;
+  final Rect? imageCenterSlice;
+  final ImageRepeat? imageRepeat;
+  final bool? imageMatchTextDirection;
+  final double? imageScale;
 
   const ImageFAB({
-    Key key,
-    @required this.image,
-    @required this.onTap,
+    Key? key,
+    required this.image,
+    required this.onTap,
     this.child,
     this.size,
     this.borderRadius,
@@ -79,11 +79,7 @@ class _ImageFABState extends State<ImageFAB> {
 
   Opacity buildButtonBodyWOpacity() {
     return Opacity(
-      opacity: isTapped
-          ? (widget.opacityValue != null)
-              ? widget.opacityValue
-              : 0.5
-          : 1,
+      opacity: isTapped ? widget.opacityValue ?? 0.5 : 1,
       child: buildButtonBody(),
     );
   }
@@ -120,20 +116,14 @@ class _ImageFABState extends State<ImageFAB> {
   DecorationImage buildImage() {
     return DecorationImage(
       image: widget.image,
-      onError: widget.onImageError,
+      onError: widget.onImageError!,
       colorFilter: widget.imageColorFilter,
       fit: widget.imageFit,
-      alignment: (widget.imageAlignment != null)
-          ? widget.imageAlignment
-          : Alignment.center,
+      alignment: widget.imageAlignment ?? Alignment.center,
       centerSlice: widget.imageCenterSlice,
-      repeat: (widget.imageRepeat != null)
-          ? widget.imageRepeat
-          : ImageRepeat.noRepeat,
-      matchTextDirection: (widget.imageMatchTextDirection != null)
-          ? widget.imageMatchTextDirection
-          : false,
-      scale: (widget.imageScale != null) ? widget.imageScale : 1.0,
+      repeat: widget.imageRepeat ?? ImageRepeat.noRepeat,
+      matchTextDirection: widget.imageMatchTextDirection ?? false,
+      scale: widget.imageScale ?? 1.0,
     );
   }
 }
@@ -155,28 +145,28 @@ class _ImageFABState extends State<ImageFAB> {
 class AnimatedImageFAB extends StatefulWidget {
   final ImageProvider<Object> image;
   final Function onTap;
-  final Widget child;
-  final double defaultSize;
-  final double tappedSize;
-  final BorderRadiusGeometry borderRadius;
-  final BoxBorder border;
-  final List<BoxShadow> shadows;
-  final Duration duration;
+  final Widget? child;
+  final double? defaultSize;
+  final double? tappedSize;
+  final BorderRadiusGeometry? borderRadius;
+  final BoxBorder? border;
+  final List<BoxShadow>? shadows;
+  final Duration? duration;
 
   ///
-  final void Function(Object, StackTrace) onImageError;
-  final ColorFilter imageColorFilter;
-  final BoxFit imageFit;
-  final AlignmentGeometry imageAlignment;
-  final Rect imageCenterSlice;
-  final ImageRepeat imageRepeat;
-  final bool imageMatchTextDirection;
-  final double imageScale;
+  final void Function(Object, StackTrace?)? onImageError;
+  final ColorFilter? imageColorFilter;
+  final BoxFit? imageFit;
+  final AlignmentGeometry? imageAlignment;
+  final Rect? imageCenterSlice;
+  final ImageRepeat? imageRepeat;
+  final bool? imageMatchTextDirection;
+  final double? imageScale;
 
   const AnimatedImageFAB({
-    Key key,
-    @required this.image,
-    @required this.onTap,
+    Key? key,
+    required this.image,
+    required this.onTap,
     this.child,
     this.defaultSize,
     this.tappedSize,
@@ -202,9 +192,9 @@ class AnimatedImageFAB extends StatefulWidget {
 
 class _AnimatedImageFABState extends State<AnimatedImageFAB>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
-  Animation _sizeAnimation;
+  late Animation _sizeAnimation;
   @override
   void initState() {
     super.initState();
@@ -223,7 +213,7 @@ class _AnimatedImageFABState extends State<AnimatedImageFAB>
             begin: (widget.defaultSize != null) ? widget.defaultSize : 60,
             end: (widget.tappedSize != null) ? widget.tappedSize : 55,
           ),
-          weight: (widget.defaultSize != null) ? widget.defaultSize : 60,
+          weight: widget.defaultSize ?? 60,
         ),
       ],
     ).animate(_animationController);
@@ -291,17 +281,11 @@ class _AnimatedImageFABState extends State<AnimatedImageFAB>
       onError: widget.onImageError,
       colorFilter: widget.imageColorFilter,
       fit: widget.imageFit,
-      alignment: (widget.imageAlignment != null)
-          ? widget.imageAlignment
-          : Alignment.center,
+      alignment: widget.imageAlignment ?? Alignment.center,
       centerSlice: widget.imageCenterSlice,
-      repeat: (widget.imageRepeat != null)
-          ? widget.imageRepeat
-          : ImageRepeat.noRepeat,
-      matchTextDirection: (widget.imageMatchTextDirection != null)
-          ? widget.imageMatchTextDirection
-          : false,
-      scale: (widget.imageScale != null) ? widget.imageScale : 1.0,
+      repeat: widget.imageRepeat ?? ImageRepeat.noRepeat,
+      matchTextDirection: widget.imageMatchTextDirection ?? false,
+      scale: widget.imageScale ?? 1.0,
     );
   }
 }

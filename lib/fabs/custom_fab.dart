@@ -3,21 +3,21 @@ library flutter_button;
 import 'package:flutter/material.dart';
 
 class CustomFAB extends StatelessWidget {
-  final Function onTap;
+  final Function() onTap;
   final Widget child;
-  final Color backgroundColor;
-  final double elevation;
-  final Color hoverColor;
-  final Color splashColor;
-  final double bottomLeftRadius;
-  final double bottomRightRadius;
-  final double topLeftRadius;
-  final double topRightRadius;
-  final BorderSide border;
+  final Color? backgroundColor;
+  final double? elevation;
+  final Color? hoverColor;
+  final Color? splashColor;
+  final double? bottomLeftRadius;
+  final double? bottomRightRadius;
+  final double? topLeftRadius;
+  final double? topRightRadius;
+  final BorderSide? border;
   const CustomFAB({
-    Key key,
-    @required this.child,
-    @required this.onTap,
+    Key? key,
+    required this.child,
+    required this.onTap,
     this.backgroundColor,
     this.elevation,
     this.hoverColor,
@@ -44,19 +44,19 @@ class CustomFAB extends StatelessWidget {
 
   RoundedRectangleBorder buildShape() {
     return RoundedRectangleBorder(
-      side: (border != null) ? border : BorderSide.none,
+      side: border ?? BorderSide.none,
       borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(
-          (bottomLeftRadius != null) ? bottomLeftRadius : 10,
+          bottomLeftRadius ?? 10,
         ),
         bottomRight: Radius.circular(
-          (bottomRightRadius != null) ? bottomRightRadius : 10,
+          bottomRightRadius ?? 10,
         ),
         topLeft: Radius.circular(
-          (topLeftRadius != null) ? topLeftRadius : 10,
+          topLeftRadius ?? 10,
         ),
         topRight: Radius.circular(
-          (topRightRadius != null) ? topRightRadius : 10,
+          topRightRadius ?? 10,
         ),
       ),
     );
@@ -66,21 +66,21 @@ class CustomFAB extends StatelessWidget {
 class AnimatedCustomFAB extends StatefulWidget {
   final Function onTap;
   final Widget child;
-  final Color backgroundColor;
-  final bool wGradient;
-  final double size;
-  final double tappedSize;
-  final BorderRadius borderRadius;
-  final List<Color> gradientColors;
-  final Duration duration;
-  final bool wShadow;
-  final List<BoxShadow> shadows;
-  final BoxBorder border;
+  final Color? backgroundColor;
+  final bool? wGradient;
+  final double? size;
+  final double? tappedSize;
+  final BorderRadius? borderRadius;
+  final List<Color>? gradientColors;
+  final Duration? duration;
+  final bool? wShadow;
+  final List<BoxShadow>? shadows;
+  final BoxBorder? border;
 
   const AnimatedCustomFAB({
-    Key key,
-    @required this.child,
-    @required this.onTap,
+    Key? key,
+    required this.child,
+    required this.onTap,
     this.backgroundColor,
     this.wGradient,
     this.size,
@@ -99,8 +99,8 @@ class AnimatedCustomFAB extends StatefulWidget {
 
 class _AnimatedCustomFABstate extends State<AnimatedCustomFAB>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _sizeAnimation;
+  late AnimationController _animationController;
+  late Animation<double> _sizeAnimation;
 
   @override
   void initState() {
@@ -118,7 +118,7 @@ class _AnimatedCustomFABstate extends State<AnimatedCustomFAB>
           begin: (widget.size != null) ? widget.size : 60,
           end: (widget.tappedSize != null) ? widget.tappedSize : 55,
         ),
-        weight: (widget.size != null) ? widget.size : 60,
+        weight: widget.size ?? 60,
       ),
     ]).animate(_animationController);
 
@@ -165,7 +165,7 @@ class _AnimatedCustomFABstate extends State<AnimatedCustomFAB>
           : BorderRadius.circular(100),
       gradient: (widget.wGradient == false || widget.wGradient == null)
           ? null
-          : LinearGradient(colors: widget.gradientColors),
+          : LinearGradient(colors: widget.gradientColors!),
       boxShadow: (widget.wShadow != null || widget.wShadow != false)
           ? widget.shadows
           : null,

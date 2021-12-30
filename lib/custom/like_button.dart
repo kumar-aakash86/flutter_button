@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 
 class LikeButton extends StatefulWidget {
   final VoidCallback onTap;
-  final IconData icon;
-  final Duration duration;
-  final Curve curve;
-  final Color deactiveColor;
-  final Color activeColor;
-  final double deactiveSize;
-  final double activeSize;
+  final IconData? icon;
+  final Duration? duration;
+  final Curve? curve;
+  final Color? deactiveColor;
+  final Color? activeColor;
+  final double? deactiveSize;
+  final double? activeSize;
 
   LikeButton({
-    @required this.onTap,
+    required this.onTap,
     this.icon,
     this.duration,
     this.curve,
@@ -27,10 +27,10 @@ class LikeButton extends StatefulWidget {
 }
 
 class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<Color> _colorAnimation;
-  Animation<double> _sizeAnimation;
-  Animation _curve;
+  late AnimationController _animationController;
+  late Animation<Color?> _colorAnimation;
+  late Animation<double> _sizeAnimation;
+  late Animation<double> _curve;
 
   bool isTapped = false;
 
@@ -47,7 +47,7 @@ class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
 
     _curve = CurvedAnimation(
       parent: _animationController,
-      curve: (widget.curve != null) ? widget.curve : Curves.bounceInOut,
+      curve: widget.curve ?? Curves.bounceInOut,
     );
 
     _colorAnimation = ColorTween(
@@ -63,14 +63,14 @@ class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
           begin: (widget.deactiveSize != null) ? widget.deactiveSize : 30,
           end: (widget.activeSize != null) ? widget.activeSize : 33,
         ),
-        weight: (widget.activeSize != null) ? widget.activeSize : 33,
+        weight: widget.activeSize ?? 33,
       ),
       TweenSequenceItem(
         tween: Tween<double>(
           begin: (widget.activeSize != null) ? widget.activeSize : 33,
           end: (widget.deactiveSize != null) ? widget.deactiveSize : 30,
         ),
-        weight: (widget.activeSize != null) ? widget.activeSize : 33,
+        weight: widget.activeSize ?? 33,
       ),
     ]).animate(_curve);
 

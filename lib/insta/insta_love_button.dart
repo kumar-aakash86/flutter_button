@@ -7,17 +7,17 @@ import 'package:flutter/material.dart';
 class InstaLoveButton extends StatefulWidget {
   final ImageProvider<Object> image;
   final VoidCallback onTap;
-  final IconData icon;
-  final Color iconColor;
-  final double height;
-  final double width;
-  final Duration duration;
-  final Curve curve;
-  final double size;
+  final IconData? icon;
+  final Color? iconColor;
+  final double? height;
+  final double? width;
+  final Duration? duration;
+  final Curve? curve;
+  final double? size;
 
   InstaLoveButton({
-    @required this.image,
-    @required this.onTap,
+    required this.image,
+    required this.onTap,
     this.icon,
     this.iconColor,
     this.height,
@@ -32,9 +32,9 @@ class InstaLoveButton extends StatefulWidget {
 
 class _InstaLoveButtonState extends State<InstaLoveButton>
     with TickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _sizeAnimation;
-  Animation _curve;
+  late AnimationController _animationController;
+  late Animation<double> _sizeAnimation;
+  late Animation<double> _curve;
 
   bool _isTapped = false;
   @override
@@ -48,7 +48,7 @@ class _InstaLoveButtonState extends State<InstaLoveButton>
 
     _curve = CurvedAnimation(
       parent: _animationController,
-      curve: (widget.curve != null) ? widget.curve : Curves.easeInOut,
+      curve: widget.curve ?? Curves.easeInOut,
     );
 
     // Curves.easeOut,
@@ -57,17 +57,17 @@ class _InstaLoveButtonState extends State<InstaLoveButton>
       <TweenSequenceItem<double>>[
         TweenSequenceItem(
           tween: Tween<double>(
-            begin: (widget.size != null) ? widget.size - 20 : 100,
+            begin: (widget.size != null) ? widget.size! - 20 : 100,
             end: (widget.size != null) ? widget.size : 120,
           ),
-          weight: (widget.size != null) ? widget.size : 120,
+          weight: widget.size ?? 120,
         ),
         TweenSequenceItem(
           tween: Tween<double>(
             begin: (widget.size != null) ? widget.size : 120,
-            end: (widget.size != null) ? widget.size - 20 : 100,
+            end: (widget.size != null) ? widget.size! - 20 : 100,
           ),
-          weight: (widget.size != null) ? widget.size : 120,
+          weight: widget.size ?? 120,
         ),
       ],
     ).animate(_curve);

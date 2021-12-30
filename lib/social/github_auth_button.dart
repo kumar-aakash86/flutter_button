@@ -5,24 +5,24 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GithubAuthButton extends StatefulWidget {
   final VoidCallback onTap;
-  final String title;
-  final Color backgroundColor;
-  final Color titleColor;
-  final Color iconColor;
-  final BorderRadiusGeometry borderRadius;
-  final List<BoxShadow> shadows;
-  final double fontSize;
-  final double iconSize;
-  final FontWeight fontWeight;
-  final bool wOpacity;
-  final bool wGradientColors;
-  final double opacityValue;
-  final List<Color> gradientColors;
-  final AlignmentGeometry beginGradient;
-  final AlignmentGeometry endGradient;
+  final String? title;
+  final Color? backgroundColor;
+  final Color? titleColor;
+  final Color? iconColor;
+  final BorderRadiusGeometry? borderRadius;
+  final List<BoxShadow>? shadows;
+  final double? fontSize;
+  final double? iconSize;
+  final FontWeight? fontWeight;
+  final bool? wOpacity;
+  final bool? wGradientColors;
+  final double? opacityValue;
+  final List<Color>? gradientColors;
+  final AlignmentGeometry? beginGradient;
+  final AlignmentGeometry? endGradient;
 
   GithubAuthButton({
-    @required this.onTap,
+    required this.onTap,
     this.title,
     this.backgroundColor,
     this.titleColor,
@@ -72,11 +72,7 @@ class _GithubAuthButtonState extends State<GithubAuthButton> {
 
   Opacity buildButtonWOpacity() {
     return Opacity(
-      opacity: _isTapped
-          ? (widget.opacityValue == null)
-              ? .7
-              : widget.opacityValue
-          : 1,
+      opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
       child: buildButton(),
     );
   }
@@ -99,7 +95,7 @@ class _GithubAuthButtonState extends State<GithubAuthButton> {
 
             ///
             Text(
-              ((widget.title != null) ? widget.title : "Github"),
+              widget.title ?? "Github",
               style: TextStyle(
                 color: (widget.titleColor == null)
                     ? Colors.white
@@ -126,20 +122,16 @@ class _GithubAuthButtonState extends State<GithubAuthButton> {
       gradient: (widget.wGradientColors == true)
           ? (widget.gradientColors != null)
               ? LinearGradient(
-                  colors: widget.gradientColors,
-                  begin: (widget.beginGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.topRight,
-                  end: (widget.endGradient != null)
-                      ? widget.beginGradient
-                      : Alignment.bottomLeft,
+                  colors: widget.gradientColors!,
+                  begin: widget.beginGradient ?? Alignment.topRight,
+                  end: widget.beginGradient ?? Alignment.bottomLeft,
                 )
               : LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
                     Colors.black,
-                    Colors.blueGrey[900],
+                    Colors.blueGrey[900]!,
                   ],
                 )
           : null,
@@ -160,19 +152,19 @@ class _GithubAuthButtonState extends State<GithubAuthButton> {
 
 class CircularGIAuthButton extends StatefulWidget {
   final VoidCallback onTap;
-  final Color backgorundColor;
-  final Color iconColor;
-  final bool wOpacity;
-  final bool wBorder;
-  final Color borderColor;
-  final double opacityValue;
-  final double size;
-  final double iconSize;
-  final List<BoxShadow> shadows;
-  final BorderRadiusGeometry borderRadius;
+  final Color? backgorundColor;
+  final Color? iconColor;
+  final bool? wOpacity;
+  final bool? wBorder;
+  final Color? borderColor;
+  final double? opacityValue;
+  final double? size;
+  final double? iconSize;
+  final List<BoxShadow>? shadows;
+  final BorderRadiusGeometry? borderRadius;
 
   CircularGIAuthButton({
-    @required this.onTap,
+    required this.onTap,
     this.backgorundColor,
     this.iconColor,
     this.wOpacity,
@@ -214,11 +206,7 @@ class CircularGIAuthButtonState extends State<CircularGIAuthButton> {
       child: (widget.wOpacity == null || widget.wOpacity == false)
           ? body()
           : Opacity(
-              opacity: _isTapped
-                  ? (widget.opacityValue != null)
-                      ? widget.opacityValue
-                      : .7
-                  : 1,
+              opacity: _isTapped ? widget.opacityValue ?? .7 : 1,
               child: body(),
             ),
     );
@@ -251,9 +239,7 @@ class CircularGIAuthButtonState extends State<CircularGIAuthButton> {
           : Colors.black,
       border: (widget.wBorder != null && widget.wBorder != false)
           ? Border.all(
-              color: (widget.borderColor != null)
-                  ? widget.borderColor
-                  : Colors.black,
+              color: widget.borderColor ?? Colors.black,
             )
           : null,
       boxShadow: (widget.shadows == null) ? [] : widget.shadows,
@@ -271,11 +257,11 @@ class CircularGIAuthButtonState extends State<CircularGIAuthButton> {
 class MagicalGIButton extends StatefulWidget {
   final String title;
   final double opacityValue;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   MagicalGIButton({
-    @required this.title,
-    @required this.opacityValue,
+    required this.title,
+    required this.opacityValue,
     this.onTap,
   });
 
@@ -297,7 +283,7 @@ class _MagicalGIButtonState extends State<MagicalGIButton> {
         setState(() {
           _isTapped = false;
         });
-        widget.onTap();
+        widget.onTap!();
       },
       onTapCancel: () {
         setState(() {
@@ -359,7 +345,7 @@ class _MagicalGIButtonState extends State<MagicalGIButton> {
           end: Alignment.bottomRight,
           colors: [
             Colors.black,
-            Colors.blueGrey[900],
+            Colors.blueGrey[900]!,
           ],
         ),
       ),

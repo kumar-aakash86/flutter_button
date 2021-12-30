@@ -70,20 +70,20 @@ class FabScreen extends StatelessWidget {
     return Column(
       children: [
         /// Default Star FAB
-        StarFAB(
-          child: Icon(Icons.add),
-          onTap: () {},
-        ),
-        SizedBox(height: 50),
+        // StarFAB(
+        //   child: Icon(Icons.add),
+        //   onTap: () {},
+        // ),
+        // SizedBox(height: 50),
 
-        /// All properties was used
-        StarFAB(
-          backgroundColor: Colors.black,
-          child: Icon(Icons.add),
-          splashColor: Colors.red,
-          elevation: 5,
-          onTap: () {},
-        ),
+        // /// All properties was used
+        // StarFAB(
+        //   backgroundColor: Colors.black,
+        //   child: Icon(Icons.add),
+        //   splashColor: Colors.red,
+        //   elevation: 5,
+        //   onTap: () {},
+        // ),
       ],
     );
   }

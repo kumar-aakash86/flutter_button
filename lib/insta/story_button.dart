@@ -5,19 +5,19 @@ class StoryButton extends StatelessWidget {
   final Widget _child;
   final VoidCallback _callback;
   final double _radius;
-  final double size;
-  final HitTestBehavior behavior;
-  final double childRadius;
+  final double? size;
+  final HitTestBehavior? behavior;
+  final double? childRadius;
 
   StoryButton({
     this.size,
     this.behavior,
-    double strokeWidth,
-    double radius,
+    required double strokeWidth,
+    required double radius,
     this.childRadius,
-    @required Gradient gradient,
-    @required Widget child,
-    @required VoidCallback onPressed,
+    required Gradient gradient,
+    required Widget child,
+    required VoidCallback onPressed,
   })  : this._painter = _PaintGradient(
           strokeWidth: strokeWidth,
           radius: radius,
@@ -46,7 +46,7 @@ class StoryButton extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(
-                  (childRadius != null) ? childRadius : 300,
+                  childRadius ?? 300,
                 ),
                 child: _child,
               ),
@@ -65,9 +65,9 @@ class _PaintGradient extends CustomPainter {
   final Gradient gradient;
 
   _PaintGradient({
-    @required double strokeWidth,
-    @required double radius,
-    @required Gradient gradient,
+    required double strokeWidth,
+    required double radius,
+    required Gradient gradient,
   })  : this.strokeWidth = strokeWidth,
         this.radius = radius,
         this.gradient = gradient;
@@ -119,11 +119,11 @@ class _PaintGradient extends CustomPainter {
 
 class AnimatedStoryButton extends StatefulWidget {
   final StoryButton storyButton;
-  final Duration duration;
+  final Duration? duration;
   final Function onTap;
   AnimatedStoryButton({
-    @required this.storyButton,
-    @required this.onTap,
+    required this.storyButton,
+    required this.onTap,
     this.duration,
   });
   @override
@@ -132,8 +132,8 @@ class AnimatedStoryButton extends StatefulWidget {
 
 class _AnimatedStoryButtonState extends State<AnimatedStoryButton>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _sizeAnimation;
+  late AnimationController _animationController;
+  late Animation<double> _sizeAnimation;
   @override
   void initState() {
     _animationController = AnimationController(
@@ -147,9 +147,9 @@ class _AnimatedStoryButtonState extends State<AnimatedStoryButton>
       TweenSequenceItem(
         tween: Tween<double>(
           begin: widget.storyButton.size,
-          end: widget.storyButton.size - 5,
+          end: widget.storyButton.size! - 5,
         ),
-        weight: widget.storyButton.size,
+        weight: widget.storyButton.size!,
       ),
     ]).animate(_animationController);
 

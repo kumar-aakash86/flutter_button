@@ -3,20 +3,20 @@ library flutter_button;
 import 'package:flutter/material.dart';
 
 class AnimatedCheckBox extends StatefulWidget {
-  final Function onChanged;
-  final Color inactiveColor;
-  final Color activeColor;
-  final double defaultSize;
-  final double activeSize;
-  final Widget child;
-  final double borderWidth;
-  final BorderRadiusGeometry borderRadius;
-  final Color borderColor;
-  final Duration duration;
+  final Function? onChanged;
+  final Color? inactiveColor;
+  final Color? activeColor;
+  final double? defaultSize;
+  final double? activeSize;
+  final Widget? child;
+  final double? borderWidth;
+  final BorderRadiusGeometry? borderRadius;
+  final Color? borderColor;
+  final Duration? duration;
 
   ///
   AnimatedCheckBox({
-    Key key,
+    Key? key,
     this.onChanged,
     this.inactiveColor,
     this.activeColor,
@@ -38,10 +38,10 @@ class AnimatedCheckBox extends StatefulWidget {
 
 class _AnimatedCheckBoxState extends State<AnimatedCheckBox>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation _sizeAnimation;
-  Animation _colorAnimation;
-  Animation _curve;
+  late AnimationController _animationController;
+  late Animation _sizeAnimation;
+  late Animation _colorAnimation;
+  late Animation<double> _curve;
 
   void forwardAnimation() {
     _animationController.forward();
@@ -79,7 +79,7 @@ class _AnimatedCheckBoxState extends State<AnimatedCheckBox>
             begin: (widget.defaultSize != null) ? widget.defaultSize : 30,
             end: (widget.activeSize != null) ? widget.activeSize : 35,
           ),
-          weight: (widget.activeSize != null) ? widget.activeSize : 35,
+          weight: widget.activeSize ?? 35,
         )
       ],
     ).animate(_curve);
@@ -101,11 +101,11 @@ class _AnimatedCheckBoxState extends State<AnimatedCheckBox>
     return GestureDetector(
       onTap: () {
         forwardAnimation();
-        widget.onChanged();
+        widget.onChanged!();
       },
       onDoubleTap: () {
         reverseAnimation();
-        widget.onChanged();
+        widget.onChanged!();
       },
       child: Container(
         height: _sizeAnimation.value,
@@ -113,9 +113,8 @@ class _AnimatedCheckBoxState extends State<AnimatedCheckBox>
         decoration: BoxDecoration(
           color: _colorAnimation.value,
           border: Border.all(
-            color:
-                (widget.borderColor != null) ? widget.borderColor : Colors.blue,
-            width: (widget.borderWidth != null) ? widget.borderWidth : 2,
+            color: widget.borderColor ?? Colors.blue,
+            width: widget.borderWidth ?? 2,
           ),
           borderRadius: (widget.borderRadius != null)
               ? widget.borderRadius
@@ -140,23 +139,23 @@ class _AnimatedCheckBoxState extends State<AnimatedCheckBox>
 
 class AnimatedTitleCheckBox extends StatefulWidget {
   final String title;
-  final Function onChanged;
-  final Color inactiveColor;
-  final Color activeColor;
-  final Color inactiveTitleColor;
-  final Color activeTitleColor;
-  final double defaultSize;
-  final double activeSize;
-  final double defaultTitleSize;
-  final double activeTitleSize;
-  final double borderWidth;
-  final BorderRadiusGeometry borderRadius;
-  final Color borderColor;
-  final Duration duration;
+  final Function? onChanged;
+  final Color? inactiveColor;
+  final Color? activeColor;
+  final Color? inactiveTitleColor;
+  final Color? activeTitleColor;
+  final double? defaultSize;
+  final double? activeSize;
+  final double? defaultTitleSize;
+  final double? activeTitleSize;
+  final double? borderWidth;
+  final BorderRadiusGeometry? borderRadius;
+  final Color? borderColor;
+  final Duration? duration;
 
   ///
   AnimatedTitleCheckBox({
-    @required this.title,
+    required this.title,
     this.onChanged,
     this.inactiveColor,
     this.activeColor,
@@ -182,12 +181,12 @@ class AnimatedTitleCheckBox extends StatefulWidget {
 
 class _AnimatedTitleCheckBoxState extends State<AnimatedTitleCheckBox>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation _sizeAnimation;
-  Animation _colorAnimation;
-  Animation _titleColorAnimation;
-  Animation _titleSizeAnimation;
-  Animation _curve;
+  late AnimationController _animationController;
+  late Animation _sizeAnimation;
+  late Animation _colorAnimation;
+  late Animation _titleColorAnimation;
+  late Animation _titleSizeAnimation;
+  late Animation<double> _curve;
 
   bool isActive = false;
 
@@ -227,7 +226,7 @@ class _AnimatedTitleCheckBoxState extends State<AnimatedTitleCheckBox>
             begin: (widget.defaultSize != null) ? widget.defaultSize : 30,
             end: (widget.activeSize != null) ? widget.activeSize : 35,
           ),
-          weight: (widget.activeSize != null) ? widget.activeSize : 35,
+          weight: widget.activeSize ?? 35,
         )
       ],
     ).animate(_curve);
@@ -244,15 +243,18 @@ class _AnimatedTitleCheckBoxState extends State<AnimatedTitleCheckBox>
     _titleSizeAnimation = TweenSequence(
       <TweenSequenceItem<double>>[
         TweenSequenceItem(
-          tween: Tween<double>(
-            begin: (widget.defaultTitleSize != null)
-                ? widget.defaultTitleSize
-                : 14,
-            end: (widget.activeTitleSize != null) ? widget.activeTitleSize : 16,
-          ),
-          weight:
-              (widget.activeTitleColor != null) ? widget.activeTitleColor : 16,
-        ),
+            tween: Tween<double>(
+              begin: (widget.defaultTitleSize != null)
+                  ? widget.defaultTitleSize
+                  : 14,
+              end: (widget.activeTitleSize != null)
+                  ? widget.activeTitleSize
+                  : 16,
+            ),
+            weight: 16
+            // weight:
+            //     (widget.activeTitleColor != null) ? widget.activeTitleColor : 16,
+            ),
       ],
     ).animate(_curve);
 
@@ -283,9 +285,8 @@ class _AnimatedTitleCheckBoxState extends State<AnimatedTitleCheckBox>
         decoration: BoxDecoration(
           color: _colorAnimation.value,
           border: Border.all(
-            color:
-                (widget.borderColor != null) ? widget.borderColor : Colors.blue,
-            width: (widget.borderWidth != null) ? widget.borderWidth : 2,
+            color: widget.borderColor ?? Colors.blue,
+            width: widget.borderWidth ?? 2,
           ),
           borderRadius: (widget.borderRadius != null)
               ? widget.borderRadius
@@ -325,23 +326,23 @@ class _AnimatedTitleCheckBoxState extends State<AnimatedTitleCheckBox>
 
 class AnimatedIconCheckBox extends StatefulWidget {
   final IconData icon;
-  final Function onChanged;
-  final Color inactiveColor;
-  final Color activeColor;
-  final Color inactiveIconColor;
-  final Color activeIconColor;
-  final double defaultSize;
-  final double activeSize;
-  final double defaultIconSize;
-  final double activeIconSize;
-  final double borderWidth;
-  final BorderRadiusGeometry borderRadius;
-  final Color borderColor;
-  final Duration duration;
+  final Function? onChanged;
+  final Color? inactiveColor;
+  final Color? activeColor;
+  final Color? inactiveIconColor;
+  final Color? activeIconColor;
+  final double? defaultSize;
+  final double? activeSize;
+  final double? defaultIconSize;
+  final double? activeIconSize;
+  final double? borderWidth;
+  final BorderRadiusGeometry? borderRadius;
+  final Color? borderColor;
+  final Duration? duration;
 
   ///
   AnimatedIconCheckBox({
-    @required this.icon,
+    required this.icon,
     this.onChanged,
     this.inactiveColor,
     this.activeColor,
@@ -366,12 +367,12 @@ class AnimatedIconCheckBox extends StatefulWidget {
 
 class _AnimatedIconCheckBoxState extends State<AnimatedIconCheckBox>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation _sizeAnimation;
-  Animation _colorAnimation;
-  Animation _iconColorAnimation;
-  Animation _iconSizeAnimation;
-  Animation _curve;
+  late AnimationController _animationController;
+  late Animation _sizeAnimation;
+  late Animation _colorAnimation;
+  late Animation _iconColorAnimation;
+  late Animation _iconSizeAnimation;
+  late Animation<double> _curve;
 
   bool isActive = false;
 
@@ -411,7 +412,7 @@ class _AnimatedIconCheckBoxState extends State<AnimatedIconCheckBox>
             begin: (widget.defaultSize != null) ? widget.defaultSize : 30,
             end: (widget.activeSize != null) ? widget.activeSize : 35,
           ),
-          weight: (widget.activeSize != null) ? widget.activeSize : 35,
+          weight: widget.activeSize ?? 35,
         )
       ],
     ).animate(_curve);
@@ -431,7 +432,7 @@ class _AnimatedIconCheckBoxState extends State<AnimatedIconCheckBox>
           begin: (widget.defaultIconSize != null) ? widget.defaultIconSize : 14,
           end: (widget.activeIconSize != null) ? widget.activeIconSize : 16,
         ),
-        weight: (widget.activeIconSize != null) ? widget.activeIconSize : 16,
+        weight: widget.activeIconSize ?? 16,
       ),
     ]).animate(_curve);
 
@@ -462,9 +463,8 @@ class _AnimatedIconCheckBoxState extends State<AnimatedIconCheckBox>
         decoration: BoxDecoration(
           color: _colorAnimation.value,
           border: Border.all(
-            color:
-                (widget.borderColor != null) ? widget.borderColor : Colors.blue,
-            width: (widget.borderWidth != null) ? widget.borderWidth : 2,
+            color: widget.borderColor ?? Colors.blue,
+            width: widget.borderWidth ?? 2,
           ),
           borderRadius: (widget.borderRadius != null)
               ? widget.borderRadius
